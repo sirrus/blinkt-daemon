@@ -41,6 +41,21 @@ def timed():
         setblinkt()
         time.sleep(1)
 
+# Get number from string with upper and lower limit
+def getint(st, low, up):
+    c = int(st)
+    if (c<low): c=low
+    if (c>up): c=up
+    return c
+
+# Get color from string
+def getcol(st):
+    return getint(st,0,254)
+
+# Get led number from string
+def getled(st):
+    return getint(st,0,7)
+
 # Get commands from socket
 def socketd():
     global STATUS,STATUSID
@@ -75,10 +90,11 @@ def socketd():
                 if len(p) != 5:
                     #print ('invalid data len %d', len(p))
                     continue
-                l = int(p[1])
-                r = int(p[2])
-                g = int(p[3])
-                b = int(p[4])
+                l = getled(p[1])
+                r = getcol(p[2])
+                g = getcol(p[3])
+                b = getcol(p[4])
+                l
                 STATUS[l][R]=r
                 STATUS[l][G]=g
                 STATUS[l][B]=b
