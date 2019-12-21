@@ -23,13 +23,24 @@ B=2
 
 # STATUS Array
 STATUS=[[0,1,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+STATUSOLD=[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+
+# test array difference
+def isdiff(a,b):
+    return a[0]!=b[0] or a[1]!=b[1] or a[2]!=b[2]
 
 # Show Status with STATUS array data
 def setblinkt():
     global STATUS
+    changed=False
     for i in range(8):
-        set_pixel(i, STATUS[i][R], STATUS[i][G], STATUS[i][B])
-    show()
+        if isdiff(STATUS[i],STATUSOLD[i]):
+            changed=True
+            set_pixel(i, STATUS[i][R], STATUS[i][G], STATUS[i][B])
+            STATUSOLD[i] = [STATUS[i][R], STATUS[i][G], STATUS[i][B]]
+    # update if changed
+    if changed:
+        show()
 
 # timed action
 def timed():
@@ -39,7 +50,7 @@ def timed():
         i=(i+1)%2
         STATUS[STATUSID][G]=i
         setblinkt()
-        time.sleep(1)
+        time.sleep(5)
 
 # Get number from string with upper and lower limit
 def getint(st, low, up):
