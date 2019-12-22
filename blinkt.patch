@@ -1,0 +1,54 @@
+--- blinkt.sh	2019-12-22 01:51:14.402209096 +0100
++++ blinkt.sh-new	2019-12-22 01:04:14.000000000 +0100
+@@ -104,6 +104,9 @@
+ RPIGPIO1="raspi-gpio_0.20170105_armhf.deb"
+ RPIGPIO2="python-rpi.gpio_0.6.3~jessie-1_armhf.deb"
+ RPIGPIO3="python3-rpi.gpio_0.6.3~jessie-1_armhf.deb"
++RPIGPIO1="rpi.gpio-common_0.6.5-1+b2_armel.deb"
++RPIGPIO2="python-rpi.gpio_0.6.5-1+b2_armel.deb"
++RPIGPIO3="python3-rpi.gpio_0.6.5-1+b2_armel.deb"
+ 
+ export PIP_FORMAT=columns
+ 
+@@ -275,8 +278,9 @@
+             USER_HOME=$(getent passwd $USER | cut -d: -f6)
+         fi
+     else
+-        warning "Running as root, please log in as a regular user with sudo rights!"
+-        echo && exit 1
++        #warning "Running as root, please log in as a regular user with sudo rights!"
++		USER_HOME=/root
++        #echo && exit 1
+     fi
+ }
+ 
+@@ -679,7 +683,8 @@
+             if ! apt_pkg_install "raspi-gpio" &> /dev/null; then
+                 echo "package raspi-gpio can't be found, fetching from alternative location..."
+                 DEBDIR=`mktemp -d /tmp/pimoroni.XXXXXX` && cd $DEBDIR
+-                wget $RPIPOOL/main/r/raspi-gpio/$RPIGPIO1 &> /dev/null
++                #wget $RPIPOOL/main/r/raspi-gpio/$RPIGPIO1 &> /dev/null
++                wget $DEBPOOL/main/r/rpi.gpio/$RPIGPIO1 &> /dev/null
+                 sudo dpkg -i $DEBDIR/$RPIGPIO1 && FAILED_PKG=false
+             fi
+         fi
+@@ -687,7 +692,8 @@
+             if [ -n $(python --version 2>&1 | grep -q "2.7") ]; then
+                 echo "package python-rpi.gpio can't be found, fetching from alternative location..."
+                 DEBDIR=`mktemp -d /tmp/pimoroni.XXXXXX` && cd $DEBDIR
+-                wget $RPIPOOL/main/r/rpi.gpio/$RPIGPIO2 &> /dev/null
++                #wget $RPIPOOL/main/r/rpi.gpio/$RPIGPIO2 &> /dev/null
++                wget $DEBPOOL/main/r/rpi.gpio/$RPIGPIO2 &> /dev/null
+                 sudo dpkg -i $DEBDIR/$RPIGPIO2 && FAILED_PKG=false
+             else
+                 sudo $PIP2_BIN install RPi.GPIO && FAILED_PKG=false
+@@ -697,7 +703,8 @@
+             if [ -n $(python3 --version 2>&1 | grep -q "3.4") ]; then
+                 echo "package python3-rpi.gpio can't be found, fetching from alternative location..."
+                 DEBDIR=`mktemp -d /tmp/pimoroni.XXXXXX` && cd $DEBDIR
+-                wget $RPIPOOL/main/r/rpi.gpio/$RPIGPIO3 &> /dev/null
++                #wget $RPIPOOL/main/r/rpi.gpio/$RPIGPIO3 &> /dev/null
++                wget $DEBPOOL/main/r/rpi.gpio/$RPIGPIO3 &> /dev/null
+                 sudo dpkg -i $DEBDIR/$RPIGPIO3 && FAILED_PKG=false
+             else
+                 sudo $PIP3_BIN install RPi.GPIO && FAILED_PKG=false

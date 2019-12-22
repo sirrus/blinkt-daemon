@@ -15,16 +15,14 @@ git clone --depth=1 https://github.com/sirrus/blinkt-daemon.git
 
 ## Install pimoroni blintk!
 
-You can install the needed blinkt! tools with:
+You can install the needed blinkt! tools on P4wnP1 via ssh with:
 
 ```
-wget http://ftp.debian.org/debian/pool/main/r/rpi.gpio/python-rpi.gpio_0.6.5-1+b2_armel.deb
-wget http://ftp.debian.org/debian/pool/main/r/rpi.gpio/python3-rpi.gpio_0.6.5-1+b2_armel.deb
-wget http://ftp.debian.org/debian/pool/main/r/rpi.gpio/rpi.gpio-common_0.6.5-1+b2_armel.deb
-dpkg -i python-rpi.gpio_0.6.5-1+b2_armel.deb
-dpkg -i python3-rpi.gpio_0.6.5-1+b2_armel.deb
-dpkg -i rpi.gpio-common_0.6.5-1+b2_armel.deb
-curl https://get.pimoroni.com/blinkt | bash
+apt-get update
+apt-get upgrade
+curl https://get.pimoroni.com/blinkt > /root/blinkt.sh
+patch --verbose < /root/blinkt-daemon/blinkt.sh.patch
+bash blinkt.sh
 ```
 
 ## Enable it
@@ -76,5 +74,6 @@ cp /root/blinkt-daemon/scripts/* cd /usr/local/P4wnP1/scripts/
 - blinkt-daemon-rsyslog.cond - rsyslog configuration
 - blinkt-daemon.py - blinkt-daemon
 - blinkt-daemon.service - systemd service file
+- blinkt.sh.patch - patch for blinkt installer on Nano PI
 - scripts folder - scripts for P4wnP1 A.L.O.A.
 
