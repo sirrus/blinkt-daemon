@@ -13,9 +13,12 @@ cd /root
 git clone --depth=1 https://github.com/sirrus/blinkt-daemon.git
 ```
 
-## Install pimoroni blintk!
+## Install pimoroni blinkt!
 
-You can install the needed blinkt! tools on P4wnP1 via ssh with:
+This project was build for [P4wnP1 A.L.O.A.](https://github.com/mame82/P4wnP1_aloa).
+
+You can install the needed blinkt! tools on P4wnP1 A.L.O.A. via ssh with:
+
 
 ```
 apt-get update
@@ -25,7 +28,7 @@ patch --verbose < /root/blinkt-daemon/blinkt.sh.patch
 bash blinkt.sh
 ```
 
-## Enable it
+## Enable blinkt-daemon
 
 ```
 cp /root/blinkt-daemon/blinkt-daemon.service /etc/systemd/system/
@@ -35,15 +38,15 @@ systemctl enable blinkt-daemon
 systemctl start blinkt-daemon
 ```
 
-## Access it
+## Controll blinkt with blinkt-daemon
 
-Enable SSH LED
+Enable SSH LED:
 
 ```
 /root/blinkt-daemon/blinkt-client.py SSH
 ```
 
-Enable any LED (6 colors r=1 g=1 b=1 - white)
+Enable any LED (LED numbe 0-7, colors r=0-255 g=0-255 b=0-255 - white):
 
 ```
 /root/blinkt-daemon/blinkt-client.py LED 6 1 1 1
@@ -55,7 +58,7 @@ Enable any LED (6 colors r=1 g=1 b=1 - white)
 - 1 green - SSH login
 - 2 green - WIFI AP
 - 2 blue - WIFI Client
-- 7 green 1 second blinking - status
+- 7 green 5 second blinking and blue status of P4wnP1 webpage - status
 
 ## P4wnP1 A.L.O.A.
 

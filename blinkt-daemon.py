@@ -66,12 +66,12 @@ def getint(st, low, up):
 
 # Get color from string
 def getcol(st):
-    """Get color"""
-    return getint(st,0,254)
+    """Get color int (0-255)"""
+    return getint(st,0,255)
 
 # Get led number from string
 def getled(st):
-    """Get LED number"""
+    """Get LED int (0-7)"""
     return getint(st,0,7)
 
 # Set LED status
