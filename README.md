@@ -38,7 +38,7 @@ systemctl enable blinkt-daemon
 systemctl start blinkt-daemon
 ```
 
-## Controll blinkt with blinkt-daemon
+## Control blinkt with blinkt-daemon
 
 Enable SSH LED:
 
@@ -79,4 +79,3 @@ cp /root/blinkt-daemon/scripts/* cd /usr/local/P4wnP1/scripts/
 - blinkt-daemon.service - systemd service file
 - blinkt.sh.patch - patch for blinkt installer on Nano PI
 - scripts folder - scripts for P4wnP1 A.L.O.A.
-

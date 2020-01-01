@@ -15,9 +15,7 @@ SSHID=1
 WIFIID=2
 STATUSID=7
 # COLOR Positions
-R=0
-G=1
-B=2
+R, G, B = 0, 1, 2
 
 # Create a UDS socket
 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
